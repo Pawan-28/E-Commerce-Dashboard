@@ -1,31 +1,32 @@
-# PHP + Apache base image
-FROM php:8.1-apache
+# PHP + Nginx base image (Laravel ke liye)
+FROM serversideup/php:8.2-fpm-nginx
 
-# Enable Apache rewrite (important for Laravel routes)
-RUN a2enmod rewrite
-
-# Install required PHP extensions
-RUN apt-get update && apt-get install -y \
-    unzip libzip-dev libpng-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
-
-# Copy project files into container
-COPY . /var/www/html
-
-# Set working directory
+# Working directory
 WORKDIR /var/www/html
 
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# Node install (Vite build ke liye)
+RUN apt-get update && apt-get install -y \
+    curl gnupg \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Laravel dependencies
+# Composer dependencies
+COPY composer.json composer.lock ./
 RUN composer install --no-dev --optimize-autoloader
 
-# Fix permissions for Laravel
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
+# Node dependencies (for vite)
+COPY package*.json ./
+RUN npm install && npm run build
 
-# Change Apache DocumentRoot to Laravel's /public folder
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf /etc/apache2/apache2.conf
+# Copy all files
+COPY . .
 
+# Laravel optimize
+RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
+
+# Expose web port
 EXPOSE 80
+
+# Start nginx + php-fpm
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
