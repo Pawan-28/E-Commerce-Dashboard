@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom mobile-friendly styles */
+@layer components {
+    /* Mobile-first button styles */
+    .btn-mobile {
+        @apply px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200;
+    }
+    
+    .btn-mobile-lg {
+        @apply px-6 py-3 text-base font-semibold rounded-xl transition-all duration-200;
+    }
+    
+    /* Mobile-friendly card styles */
+    .card-mobile {
+        @apply bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700;
+    }
+    
+    /* Mobile-friendly input styles */
+    .input-mobile {
+        @apply w-full rounded-lg sm:rounded-xl border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm;
+    }
+    
+    /* Mobile-friendly table styles */
+    .table-mobile {
+        @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
+    }
+    
+    .table-header-mobile {
+        @apply px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider;
+    }
+    
+    .table-cell-mobile {
+        @apply px-4 sm:px-6 py-4 text-sm text-gray-900 dark:text-gray-100;
+    }
+    
+    /* Mobile-friendly navigation styles */
+    .nav-mobile {
+        @apply flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0;
+    }
+    
+    .nav-link-mobile {
+        @apply text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200;
+    }
+    
+    /* Mobile-friendly spacing utilities */
+    .section-mobile {
+        @apply py-4 sm:py-8;
+    }
+    
+    .container-mobile {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+    
+    .space-mobile {
+        @apply space-y-4 sm:space-y-6;
+    }
+    
+    /* Mobile-friendly grid layouts */
+    .grid-mobile {
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6;
+    }
+    
+    .grid-mobile-2 {
+        @apply grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6;
+    }
+    
+    /* Mobile-friendly text sizes */
+    .text-mobile {
+        @apply text-sm sm:text-base;
+    }
+    
+    .text-mobile-lg {
+        @apply text-base sm:text-lg;
+    }
+    
+    .text-mobile-xl {
+        @apply text-lg sm:text-xl;
+    }
+    
+    .text-mobile-2xl {
+        @apply text-xl sm:text-2xl;
+    }
+    
+    .text-mobile-3xl {
+        @apply text-2xl sm:text-3xl;
+    }
+    
+    /* Mobile-friendly padding and margins */
+    .p-mobile {
+        @apply p-4 sm:p-6;
+    }
+    
+    .px-mobile {
+        @apply px-4 sm:px-6;
+    }
+    
+    .py-mobile {
+        @apply py-4 sm:py-6;
+    }
+    
+    .m-mobile {
+        @apply m-4 sm:m-6;
+    }
+    
+    .mx-mobile {
+        @apply mx-4 sm:mx-6;
+    }
+    
+    .my-mobile {
+        @apply my-4 sm:my-6;
+    }
+    
+    /* Mobile-friendly border radius */
+    .rounded-mobile {
+        @apply rounded-lg sm:rounded-xl;
+    }
+    
+    .rounded-mobile-lg {
+        @apply rounded-xl sm:rounded-2xl;
+    }
+    
+    .rounded-mobile-xl {
+        @apply rounded-2xl sm:rounded-3xl;
+    }
+    
+    /* Mobile-friendly shadows */
+    .shadow-mobile {
+        @apply shadow-lg hover:shadow-xl transition-shadow duration-200;
+    }
+    
+    /* Mobile-friendly transitions */
+    .transition-mobile {
+        @apply transition-all duration-200 ease-in-out;
+    }
+    
+    /* Mobile-friendly hover effects */
+    .hover-mobile {
+        @apply hover:scale-105 hover:shadow-xl transition-all duration-200;
+    }
+    
+    /* Mobile-friendly focus states */
+    .focus-mobile {
+        @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800;
+    }
+    
+    /* Mobile-friendly disabled states */
+    .disabled-mobile {
+        @apply opacity-50 cursor-not-allowed;
+    }
+    
+    /* Mobile-friendly loading states */
+    .loading-mobile {
+        @apply animate-pulse bg-gray-200 dark:bg-gray-700;
+    }
+    
+    /* Mobile-friendly skeleton loading */
+    .skeleton-mobile {
+        @apply bg-gray-200 dark:bg-gray-700 animate-pulse rounded;
+    }
+    
+    /* Mobile-friendly scrollbar */
+    .scrollbar-mobile {
+        @apply scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800;
+    }
+    
+    /* Mobile-friendly backdrop blur */
+    .backdrop-mobile {
+        @apply backdrop-blur-sm bg-white/80 dark:bg-gray-800/80;
+    }
+    
+    /* Mobile-friendly glass effect */
+    .glass-mobile {
+        @apply bg-white/20 dark:bg-gray-800/20 backdrop-blur-md border border-white/30 dark:border-gray-700/30;
+    }
+}
+
+/* Custom scrollbar for webkit browsers */
+@layer utilities {
+    .scrollbar-thin {
+        scrollbar-width: thin;
+    }
+    
+    .scrollbar-thumb-gray-300 {
+        scrollbar-color: rgb(209 213 219) transparent;
+    }
+    
+    .scrollbar-thumb-gray-600 {
+        scrollbar-color: rgb(75 85 99) transparent;
+    }
+    
+    .scrollbar-track-gray-100 {
+        scrollbar-color: transparent rgb(243 244 246);
+    }
+    
+    .scrollbar-track-gray-800 {
+        scrollbar-color: transparent rgb(31 41 55);
+    }
+}
+
+/* Dark mode improvements */
+@media (prefers-color-scheme: dark) {
+    .dark\:bg-gray-900 {
+        background-color: rgb(17 24 39);
+    }
+    
+    .dark\:text-gray-100 {
+        color: rgb(243 244 246);
+    }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+    /* Improve touch targets on mobile */
+    button, a, input, select, textarea {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Better mobile spacing */
+    .mobile-spacing {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    /* Mobile-friendly font sizes */
+    .mobile-text {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+    
+    /* Mobile-friendly line heights */
+    .mobile-leading {
+        line-height: 1.5;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .border {
+        border-width: 2px;
+    }
+    
+    .focus\:ring-2 {
+        --tw-ring-width: 4px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
