@@ -1,32 +1,35 @@
-# PHP + Nginx base image (Laravel ke liye)
+# ---- Base image with PHP + Nginx ----
 FROM serversideup/php:8.2-fpm-nginx
 
-# Working directory
+# Set working directory
 WORKDIR /var/www/html
 
-# Node install (Vite build ke liye)
+# Install system dependencies + Node.js (for Vite build)
+USER root
 RUN apt-get update && apt-get install -y \
     curl gnupg \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    && rm -rf /var/lib/apt/lists/*
+ && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+ && apt-get install -y nodejs \
+ && rm -rf /var/lib/apt/lists/*
 
-# Composer dependencies
+# Copy composer files and install dependencies
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --optimize-autoloader
 
-# Node dependencies (for vite)
+# Copy package.json and build frontend with Vite
 COPY package*.json ./
 RUN npm install && npm run build
 
-# Copy all files
+# Copy rest of application code
 COPY . .
 
-# Laravel optimize
-RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
+# Laravel optimizations
+RUN php artisan config:cache \
+ && php artisan route:cache \
+ && php artisan view:cache
 
-# Expose web port
+# Expose HTTP port
 EXPOSE 80
 
-# Start nginx + php-fpm
+# Start supervisor (manages nginx + php-fpm)
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
