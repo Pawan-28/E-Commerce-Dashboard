@@ -12,7 +12,7 @@
      && apt-get install -y nodejs \
      && rm -rf /var/lib/apt/lists/*
     
-    # Copy entire application code
+    # Copy application code
     COPY . .
     
     # Install PHP dependencies
@@ -32,6 +32,6 @@
     # Expose HTTP port
     EXPOSE 80
     
-    # Start supervisor (runs nginx + php-fpm)
-    CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+    # Start: migrate DB then launch supervisor (nginx + php-fpm)
+    CMD sh -c "php artisan migrate --force && supervisord -c /etc/supervisor/conf.d/supervisord.conf"
     
